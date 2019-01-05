@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>MY BLOG</title>
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    </head>
+    <body>
+
+        <div class="square"></div>
+
+        <ul class="blogPosts">
+            <% for(var i=0; i<blogPosts.length; i++) {%>
+            <li class="quote">
+                <span class="name"><%= blogPosts[i].name %></span>
+                <span class="post"><%= blogPosts[i].post %></span>
+            </li>
+            <% } %>
+        </ul>
+
+        <form action="/blogPosts" method="POST">
+            <input type="text" placeholder="name" name="name">
+            <input type="text" placeholder="post" name="post">
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
