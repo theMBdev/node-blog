@@ -15,6 +15,7 @@
     --black-2: hsla(0, 0%, 30%, 1); 
     --black-3: hsla(0, 0%, 38%, 1); 
     --black-4: hsla(0, 0%, 45%, 1); 
+    --black-5: hsla(0, 0%, 88%, 1); 
     --red: hsla(0, 100%, 65%, 1); 
     --super-light-grey: hsla(0, 0%, 93%, 1);
 }
@@ -35,32 +36,32 @@ h1, h2, h3, h4, h5, h6, p{
 }
 
 h1 {
-    font-size: 46;
+    font-size: 34px;
 }
 
 h2 {
-    font-size: 34;
+    font-size: 28px;
 }
 
 h3 {
-    font-size: 28;
+    font-size: 24px;
 }
 
 h4 {
-    font-size: 24;
+    font-size: 18px;
 
 }
 
 h5 {
-    font-size: 20;
+    font-size: 20px;
 }
 
 h6 {
-    font-size: 18;
+    font-size: 18px;
 }
 
 p {
-    font-size: 16;
+    font-size: 16px;
 }
 
 /*NAV*/
@@ -157,12 +158,13 @@ nav h2 {
     background-color: var( --super-light-grey);
     text-align: center;
     margin-top: 20px;
-    padding: 20px;
+    padding: 20px;    
 }
 
 .email p {
     margin-top: 10px;
     margin-bottom: 20px;
+    font-size: 16px;
 }
 
 .email__input {
@@ -172,12 +174,13 @@ nav h2 {
     padding: 14px 22px;
     width: 100%;
     border: none;
+
 }
 
 .email__submit {
     display: block;
     margin: auto;
-    
+
 }
 
 input[type=submit] {
@@ -191,12 +194,87 @@ input[type=submit] {
     width: 100%;
 }
 
+/*side headers*/
+.side-header {
+    width: 100%;
+    height: 44px;
+    background-color: var(--black-5);
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
 
+.side-header h6 {
+    line-height: 44px;
+    text-align: center;
+}
+
+/*side popular posts*/
+.small_card {
+    width: 100%;
+    height: 110px;
+    
+    background-color: bisque;
+}
+
+.small_card--left {
+    width: 35%;
+    background-color: violet;
+    height: 110px;
+    float: left;
+}
+
+.small_card--right {
+    position: relative;
+    width: 65%;
+    background-color: gold;
+    height: 110px;
+    padding: 10px;
+    float: left;
+}
+
+.small_card--right h6 {
+   font-size: 16px;
+    padding-bottom: 10px;
+}
+
+.small_card--right p {
+  position: absolute;
+	bottom: 0px;
+}
 
 
 
 
 @media only screen and (min-width: 1050px) {
+
+    h1 {
+        font-size: 46px;
+    }
+
+    h2 {
+        font-size: 34px;
+    }
+
+    h3 {
+        font-size: 28px;
+    }
+
+    h4 {
+        font-size: 24px;
+
+    }
+
+    h5 {
+        font-size: 20px;
+    }
+
+    h6 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 16px;
+    }
 
     /*NAV*/
     nav {    
