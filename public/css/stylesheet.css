@@ -149,7 +149,11 @@ nav h2 {
     float: right;
     object-fit: cover;
     width: 100px;
-    overflow: hidden
+    overflow: hidden;
+}
+
+.side {
+    margin: 10px;
 }
 
 .email {
@@ -158,7 +162,7 @@ nav h2 {
     background-color: var( --super-light-grey);
     text-align: center;
     margin-top: 20px;
-    padding: 20px;    
+    padding: 20px;
 }
 
 .email p {
@@ -217,7 +221,7 @@ input[type=submit] {
 }
 
 .small_card--left {
-    width: 35%;
+    width: 25%;
     background-color: violet;
     height: 110px;
     float: left;
@@ -225,7 +229,7 @@ input[type=submit] {
 
 .small_card--right {
     position: relative;
-    width: 65%;
+    width: 75%;
     background-color: gold;
     height: 110px;
     padding: 10px;
@@ -234,16 +238,37 @@ input[type=submit] {
 
 .small_card--right h6 {
    font-size: 16px;
-    padding-bottom: 10px;
+    
 }
 
 .small_card--right p {
   position: absolute;
 	bottom: 0px;
+    padding-bottom: 5px;
+}
+
+/*social links*/
+
+.social {
+    display: flex; /* or inline-flex */
+     flex-wrap: nowrap;
+  background-color: greenyellow;
+    align-items: stretch;
 }
 
 
-
+.social > .social__link {
+   background-color: DodgerBlue;
+  color: white;
+  width: 100px;
+    height: 50px;
+  margin: 5px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+  flex-grow: 1;
+    
+}
 
 @media only screen and (min-width: 1050px) {
 
@@ -304,7 +329,6 @@ input[type=submit] {
     /*card*/
     .card {
         width: 660px;
-
         background-color: beige;
         padding: 10px;
     }

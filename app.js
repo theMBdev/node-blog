@@ -4,7 +4,7 @@ const app = express();
 
 // bodyparser setup 
 const bodyParser= require('body-parser');
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({extended: true}));
 
 // ejs setup 
 app.set('view engine', 'ejs');
@@ -19,7 +19,7 @@ password = configFile.password;
 blogString = configFile.blogString;
 
 // mongodb setup
-const MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient;
 
 // mongodb connection to mlab
 MongoClient.connect('mongodb://' + userName + ':' + password + blogString, { useNewUrlParser: true }, (err, client) => {

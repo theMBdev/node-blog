@@ -1,7 +1,6 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -17,5 +16,14 @@
     "dev": "nodemon server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martingit9/node-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/martingit9/node-blog/issues"
+  },
+  "homepage": "https://github.com/martingit9/node-blog#readme",
+  "description": ""
 }
