@@ -270,6 +270,7 @@ input[type=submit] {
     font-size: 30px;
     flex-grow: 1;   
     border: 1px solid var(--black-4);
+    cursor: pointer;
 }
 
 .social__link:first-child {
