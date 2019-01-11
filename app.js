@@ -38,10 +38,11 @@ MongoClient.connect('mongodb://' + userName + ':' + password + blogString, { use
 
 // home page
 app.get('/', (req, res) => {
-    db.collection('blogPosts').find().toArray((err, result) => {
+
+    
+    db.collection('blogPosts').find().sort( { _id: -1 } ).toArray((err, result) => {
         if (err) return console.log(err)
 
-        result.reverse();
         // renders index.ejs with the blogposts array
         res.render('index.ejs', {blogPosts: result})
     })
@@ -68,7 +69,7 @@ app.post('/blogPosts', (req, res) => {
 // UPDATE blog posts
 app.post('/update-post/:id', (req, res) => {    
     
-    db.collection('blogPosts').updateOne({_id: ObjectId(req.params.id)}, { $set: {title : req.body.title, post : req.body.post} },{upsert: true}, (err) => {
+    db.collection('blogPosts').updateOne({_id: ObjectId(req.params.id)}, { $set: {title : req.body.title, post : req.body.post, image: req.body.image} },{upsert: true}, (err) => {
         if(err){
             console.log(err)
             return;
@@ -112,12 +113,11 @@ app.get('/about', (req, res) => {
 app.get('/cms', (req, res) => {    
     res.render('cms.ejs')
 })
-
+     
 app.get('/cms-posts', (req, res) => {
-    db.collection('blogPosts').find().toArray((err, result) => {
+    db.collection('blogPosts').find().sort( { _id: -1 } ).toArray((err, result) => {
         if (err) return console.log(err)
 
-        result.reverse();
         // renders index.ejs with the blogposts array
         res.render('cms-posts.ejs', {blogPosts: result})
     })

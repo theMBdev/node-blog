@@ -17,29 +17,36 @@
     <body>       
 
 
-        <div class="side-nav">
+        <div class="cms">
 
-            <h3 class="side-nav__title">BLOG <span class="side-nav__title--cms">cms</span></h3>            
+            <div class="side-nav">
 
-            <a href="#" class="cms-link" name="/">Dashboard</a>
-            <a href="#" class="cms-link" name="/cms-posts">Posts</a>
-            <a href="#">Social</a>            
-            <a href="#">Comments</a>
+                <h3 class="side-nav__title">BLOG <span class="side-nav__title--cms">cms</span></h3>            
+
+                <a href="#" class="cms-link" name="/">Dashboard</a>
+                <a href="#" class="cms-link" name="/cms-posts">Posts</a>
+                <a href="#" class="cms-link" name="/create-post">Create</a>
+                <a href="#">Social</a>            
+                <a href="#">Comments</a>
+
+            </div>
+
+            <div class="main">
+                
+                
+
+                <div id="container"></div>
+            </div>
+
 
         </div>
 
-        <div class="main">
-            <% include templates/header.ejs %>
-            <h2>MAIN</h2>
-           
-            <div id="container"></div>
-        </div>
 
 
         <script>
 
             $( ".cms-link" ).click(function() {
-                
+
                 console.log($(this).attr('name'));
                 $.ajax({ url: $(this).attr('name')
                         , type: 'GET'

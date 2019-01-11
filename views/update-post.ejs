@@ -1,8 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        
         <base href="/">
+       
         <title>MY BLOG</title>
         <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
@@ -10,16 +13,78 @@
 
     </head>
     <body>
-        
-        <nav><h2 class="nav__title">BLOG</h2></nav>
-   
-         <% include templates/header.ejs %>
 
-        <form method="POST" action="/update-post/<%= blogPosts[0]._id %>">
-            <input type="text" placeholder="title" name="title" value="<%= blogPosts[0].title %>">
-            <input type="text" placeholder="post" name="post" value="<%= blogPosts[0].post %>">
-            <button type="submit">Submit</button>
-        </form>
-        
+        <nav class="cms-header"><h2 class="nav__title">Create Post</h2>
+
+            <div class="create-post__buttons">
+                <button class="button--post" type="submit" form="post-form">Publish</button>
+                <button class="button--cancel cancel-post" href="#" name="/cms-posts">Cancel</button>
+            </div>
+        </nav>
+
+        <div class="create-post">
+
+
+            <form action="/update-post/<%= blogPosts[0]._id %>" method="POST" id="post-form"><!--
+<input type="text" placeholder="title" name="title">
+<input type="text" placeholder="post" name="post">-->
+
+                <div class="create-post__top">
+
+                    <div class="input">
+                        <label for="title">Title</label>
+                        <input id="name" name="title" type="text" value="<%= blogPosts[0].title %>" />
+                    </div>
+
+                    <div class="input image-upload">
+                        <label for="image">Image <small>(optional)</small></label>
+                        <input id="image-upload" name="image" type="text" value="<%= blogPosts[0].image %>"/>
+                    </div>
+
+
+
+                </div>
+
+                <div class="create-post__bottom">
+
+
+                    <div class="input">
+                        <label for="post">Post</label>               
+                        <textarea name="post" rows="8" cols="50">
+                            <%= blogPosts[0].post %>
+                        </textarea>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+
+            </form>
+
+        </div>
+
+        <script>
+            $( ".cancel-post" ).click(function() {
+                console.log($(this).attr('name'));
+                $.ajax({ url: $(this).attr('name')
+                        , type: 'GET'
+                        , dataType: 'html'
+                       })
+                    .done(function(data) {
+                    $('#container').html(data);
+                })
+                    .fail(function() {
+                    console.log("Something went wrong!");
+                });
+            });
+        </script>
     </body>
 </html>
+
+
+

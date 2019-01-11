@@ -67,12 +67,25 @@ a {
 /*NAV*/
 nav {    
     background-color: var(--black-1);
+    display: flex;
+    justify-content: flex end;
+    position: relative;
 }
 
 nav h2 {
     padding: 12px 12px 12px 12px;
     margin: 0px;
     color: var(--white);
+}
+
+.cms-header {
+    background-color: var(--white);
+    color: var(--black-1);
+}
+
+.cms-header h2{   
+    padding: 12px 12px 12px 0px;
+    color: var(--black-1);
 }
 
 /*header*/
@@ -84,7 +97,7 @@ nav h2 {
 /*panel*/
 .panel {
     width: 100%;
-    height: 1000px;
+    height: 100%;
     background-color: var(--white);     
     padding: 5px;
 }
@@ -122,15 +135,15 @@ nav h2 {
 .card__date {
 
 }
-
+ 
 .card__comments {
 
 }
 
 .card__container {
-    width: 100%;
+    width: 100px;
     height: 100px;
-    background-color: aquamarine;
+    background-color: gainsboro;
     float: right;  
 }
 
@@ -150,7 +163,9 @@ nav h2 {
     float: right;
     object-fit: cover;
     width: 100px;
+     height: 100%;
     overflow: hidden;
+    background-color: white;    
 }
 
 .card__container__category {
@@ -164,7 +179,7 @@ nav h2 {
 /*email*/
 .email {
     width: 100%;   
-    height: 245px;
+    height: 225px;
     background-color: var( --super-light-grey);
     text-align: center;
     margin-top: 20px;
@@ -294,6 +309,12 @@ input[type=submit] {
 /* CMS */
 /* CMS */
 /* CMS */
+
+.cms {
+    width 700px;
+    margin: auto;
+}
+
 .side-nav {
     width: 210px;
     height: 100%;
@@ -312,6 +333,7 @@ input[type=submit] {
     font-weight: 400;
     color: var(--red);
     margin-bottom: 20px;
+
 }
 
 .side-nav__title--cms {
@@ -330,25 +352,112 @@ input[type=submit] {
     margin-left: 210px; 
     padding: 0px 10px;
     background-color: var(--white);
+    height: 100vh;
 }
 
 /*cms-posts*/
 .cms-row {
     width: 100%;
-    padding: 5px;
+    padding-top: 5px;
     margin-bottom: 5px;
     height: 55px;
-    background-color: blanchedalmond;
-    border: 1px solid black;   
+    border-top: 1px solid black;   
 }
 
 .cms-row__title {
     margin-bottom: 5px;
+    font-size: 
 }
 
 .row span {
     font-size: 16px;
 }
+
+
+
+
+/*    Create post */
+.input {
+    display: block;
+    margin-bottom: 1em;
+}
+
+
+
+select,
+textarea,
+input[type="text"] {
+    width: 100%;
+    display: block;
+    border: 1px solid #eee;
+    padding: 0.25em 0.5em;  
+    outline: none;
+    background-color: #F8F8F8;
+}
+
+.create-post {    
+    margin: auto;
+    max-width: 500px;
+    min-width: 300px;
+    height: 200px;
+}
+
+.create-post__top {
+    display: flex;
+    justify-content:  flex-start;
+}
+
+.image-upload {
+    margin-left: 10px;
+}
+
+.create-post__bottom {
+
+}
+
+/*
+.create-post--left {
+float: left;
+
+width: 100%;
+margin-right: 10px;
+}
+
+.create-post--right {
+float: left;
+width: 50%;    
+}
+*/
+
+.create-post__buttons {  
+    position: absolute;
+    right: 10px;
+    top: 13px;
+}
+
+.button--post {       
+    background-color: var(--red);
+    border: none;
+    color: var(--white);
+    padding: 8px 22px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--red);
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.button--cancel {       
+    background-color: white;
+    border: none;
+    color: var(--black-1);
+    padding: 8px 22px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--black-1);
+    border-radius: 3px;    
+}
+
 
 
 /*TABLET*/
@@ -368,7 +477,13 @@ input[type=submit] {
     }
 
     .card__image {
+        width: 130px;        
+    }
+
+    .card__container {
         width: 130px;
+        height: 130px;
+        float: right;  
     }
 
     .card__container__category {
@@ -421,6 +536,19 @@ input[type=submit] {
     .social {
         margin-left: 5px;
     }
+
+
+    /*cms*/
+
+    .create-post {    
+        margin: auto;
+        max-width: 700px;
+        min-width: 300px;
+        height: 200px;
+    }
+
+
+
 
 
 }
@@ -479,7 +607,6 @@ input[type=submit] {
     /*panel*/
     .panel {
         width: 1040px;
-        height: 1000px;
         background-color: var(--white);
         margin: auto;
         display: flex;
@@ -579,6 +706,12 @@ input[type=submit] {
     }
 
 
+    /*    cms*/
 
+    .create-post {    
+        margin: auto;
+        width: 1050px;
+        height: 200px;
+    }
 
 }
