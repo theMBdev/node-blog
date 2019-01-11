@@ -5,7 +5,10 @@
         <title>MY BLOG</title>
         <base href="/">
         <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Montserrat:400,500|Vollkorn" rel="stylesheet">
+        
+        
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     </head>
@@ -13,12 +16,15 @@
 
         <nav><h2 class="nav__title">BLOG</h2></nav>
 
-        <% include templates/header.ejs %>
+        <div class="post-container">
+            <div class="post-title">
+                <h2 class=""><%= blogPosts[0].title %></h2>
+            </div>        
 
-        <h2>POST</h2>        
+            <p class="post-body"><%= blogPosts[0].post %></p>  
+        </div>
 
-            <h4 class=""><%= blogPosts[0].title %></h4>
-            <p class=""><%= blogPosts[0].post %></p>        
+
 
     </body>
 </html>
