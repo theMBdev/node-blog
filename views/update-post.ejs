@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <base href="/">
+        <title>MY BLOG</title>
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+    <body>
+        
+        <nav><h2 class="nav__title">BLOG</h2></nav>
+   
+         <% include templates/header.ejs %>
+
+        <form method="POST" action="/update-post/<%= blogPosts[0]._id %>">
+            <input type="text" placeholder="title" name="title" value="<%= blogPosts[0].title %>">
+            <input type="text" placeholder="post" name="post" value="<%= blogPosts[0].post %>">
+            <button type="submit">Submit</button>
+        </form>
+        
+    </body>
+</html>

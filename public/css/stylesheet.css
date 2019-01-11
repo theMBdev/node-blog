@@ -12,6 +12,7 @@
     --black-5: hsla(0, 0%, 88%, 1); 
     --red: hsla(0, 100%, 65%, 1); 
     --super-light-grey: hsla(0, 0%, 93%, 1);
+    --lightest-blue: hsla(223, 47%, 97%, 1);
 }
 /*var(--main-bg-color)*/
 
@@ -58,6 +59,11 @@ p {
     font-size: 16px;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 /*NAV*/
 nav {    
     background-color: var(--black-1);
@@ -87,14 +93,13 @@ nav h2 {
 .card {
     position: relative;
     width: 100%;
-    height: 150px;
-    background-color: beige;
+    height: 100px;
     margin-bottom: 30px;
-    
+
 }
 
 .card__title {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .card__body {
@@ -111,7 +116,7 @@ nav h2 {
 .card__author {
     margin-bottom: 2px;   
     position: absolute;
-    bottom: 5px;    
+    bottom: 0px;    
 }
 
 .card__date {
@@ -130,10 +135,8 @@ nav h2 {
 }
 
 .card__left {
-    width: calc(100% - 100px);
-    background-color: aqua;
+    width: calc(100% - 100px);    
     float: left;
-
 }
 
 .card__right {    
@@ -160,12 +163,13 @@ nav h2 {
 
 /*email*/
 .email {
-    width: 100%;
-    height: 260px;
+    width: 100%;   
+    height: 245px;
     background-color: var( --super-light-grey);
     text-align: center;
     margin-top: 20px;
     padding: 20px;
+    position: relative;
 }
 
 .email p {
@@ -181,12 +185,9 @@ nav h2 {
     padding: 14px 22px;
     width: 100%;
     border: none;
-
 }
 
 .email__submit {
-    display: block;
-    margin: auto;
 
 }
 
@@ -290,19 +291,84 @@ input[type=submit] {
 }
 
 
+/* CMS */
+/* CMS */
+/* CMS */
+.side-nav {
+    width: 210px;
+    height: 100%;
+    background-color: var(--lightest-blue);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+    color: white;
+}
+
+.side-nav__title {
+    text-align: center;
+    font-weight: 400;
+    color: var(--red);
+    margin-bottom: 20px;
+}
+
+.side-nav__title--cms {
+    font-weight: 100;
+}
+
+.side-nav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: var(--black-1);
+    display: block;
+}
+
+.main {
+    margin-left: 210px; 
+    padding: 0px 10px;
+    background-color: var(--white);
+}
+
+/*cms-posts*/
+.cms-row {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    height: 55px;
+    background-color: blanchedalmond;
+    border: 1px solid black;   
+}
+
+.cms-row__title {
+    margin-bottom: 5px;
+}
+
+.row span {
+    font-size: 16px;
+}
+
+
+/*TABLET*/
 @media only screen and (min-width: 600px) {
 
     .panel {
         padding: 10px;   
     }
+    .card {
+        height: 130px;
+    }
+
 
     .card__left {
-        width: calc(100% - 150px);
+        width: calc(100% - 130px);
         float: left;
     }
 
     .card__image {
-        width: 150px;
+        width: 130px;
     }
 
     .card__container__category {
@@ -360,9 +426,7 @@ input[type=submit] {
 }
 
 
-
-
-/*desktop*/
+/*DESKTOP*/
 @media only screen and (min-width: 1060px) {
 
     h1 {
@@ -374,11 +438,11 @@ input[type=submit] {
     }
 
     h3 {
-        font-size: 28px;
+        font-size: 24px;
     }
 
     h4 {
-        font-size: 24px;
+        font-size: 20px;
 
     }
 
@@ -436,13 +500,12 @@ input[type=submit] {
 
     /*card*/
     .card {
-        width: 660px;
-        background-color: beige;        
-        height: 150px;
+        width: 660px;      
+        height: 130px;
     }
 
     .card__title {
-
+        margin-bottom: 10px;
     }
 
     .card__body {
@@ -464,20 +527,12 @@ input[type=submit] {
 
     }
 
-    .card__left {
-        
-        width: calc(100% - 150px);
-        float: left;
-    }
 
-    .card__image {
-        width: 150px;
-    }
 
     .card__container__category {
         display: none;
     }
-    
+
 
 
     /*email*/
