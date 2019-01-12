@@ -1,0 +1,13 @@
+<html>
+    <body>
+        <form action="/authenticate-email/<%= emailList[0]._id %>" method="POST" id="update-form">
+
+            <p><%= emailList[0].email %></p>
+        </form>
+
+        <script>
+            document.getElementById("update-form").submit();
+        </script>        
+
+    </body>
+</html>

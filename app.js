@@ -7,7 +7,8 @@ const publicPath = path.join(__dirname, '/public');
 // to serve static files
 app.use(express.static(publicPath));
 
-
+// to send emails form the server
+var nodemailer = require('nodemailer');
 
 // bodyparser setup 
 const bodyParser= require('body-parser');
@@ -21,6 +22,8 @@ var configFile = require('./configFile.js');
 userName = configFile.userName;
 password = configFile.password;
 blogString = configFile.blogString;
+emailUser = configFile.emailUser;
+emailPass = configFile.emailPass;
 
 // mongodb setup
 const MongoClient = require('mongodb').MongoClient;
@@ -66,14 +69,32 @@ app.post('/blogPosts', (req, res) => {
     })
 })
 
+// SUBMIT email
 app.post('/submit-email', (req, res) => {    
     req.body['authenticated'] = false;
     db.collection('emailList').insertOne(req.body, (err, result) => {
         if (err) return console.log(err)
 
         console.log('saved email to database')        
-        //res.status(200).send({ success: true })
+        console.log(req.body)        
         res.status(204).send();
+
+        // send authentication email
+        var mailOptions = {
+            from: emailUser,
+            to: req.body.email,
+            subject: 'Sending Email using Node.js',
+            text: 'http://localhost:3000/authenticate-email/' + req.body._id            
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+
     })
 })
 
@@ -113,12 +134,12 @@ app.post('/delete-email/:id', (req, res) => {
 // Authenticate email
 app.post('/authenticate-email/:id', (req, res) => {    
 
-    db.collection('emailList').updateOne({_id: ObjectId(req.params.id)}, { $set: {authenticated : true} },{upsert: true}, (err) => {
+    db.collection('emailList').updateOne({_id: ObjectId(req.params.id)}, { $set: {authenticated : true} }, {upsert: true}, (err) => {
         if(err){
             console.log(err)
             return;
         } else {
-            res.redirect('/cms')
+            res.redirect('/')
         }
     })
 })
@@ -128,10 +149,12 @@ app.get('/about', (req, res) => {
     res.render('about')
 })
 
+// post page to enter the post information
 app.get('/create-post', (req, res) => {   
     res.render('create-post')
 })
 
+// update post page to enter the update information
 app.get('/update-post/:id', (req, res) => {
     db.collection('blogPosts').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
         if (err) return console.log(err)
@@ -139,6 +162,7 @@ app.get('/update-post/:id', (req, res) => {
     })  
 })   
 
+// confirm deleting post
 app.get('/delete-post/:id', (req, res) => {
     db.collection('blogPosts').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
         if (err) return console.log(err)
@@ -146,15 +170,20 @@ app.get('/delete-post/:id', (req, res) => {
     })  
 })   
 
-app.get('/about', (req, res) => {    
-    res.render('about')
-})
+// page that calls the post request to authenticate email
+app.get('/authenticate-email/:id', (req, res) => {
+    db.collection('emailList').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('authenticate-email', {emailList: result})
+    })  
+})   
 
 // content management center
 app.get('/cms', (req, res) => {    
     res.render('cms')
 })
 
+// display list of posts
 app.get('/cms-posts', (req, res) => {
     db.collection('blogPosts').find().sort( { _id: -1 } ).toArray((err, result) => {
         if (err) return console.log(err)
@@ -162,6 +191,7 @@ app.get('/cms-posts', (req, res) => {
     })
 })
 
+// display list of emails
 app.get('/cms-emails', (req, res) => {
     db.collection('emailList').find().sort( { _id: -1 } ).toArray((err, result) => {
         if (err) return console.log(err)
@@ -171,3 +201,11 @@ app.get('/cms-emails', (req, res) => {
 
 
 
+// email credentials
+var transporter = nodemailer.createTransport({
+    service: 'hotmail',
+    auth: {
+        user: emailUser,
+        pass: emailPass
+    }
+});
