@@ -65,7 +65,7 @@ a {
 }
 
 .index {
-    background-color: var(--lightest-blue)  ; 
+    background-color: var(--lightest-blue); 
 }
 
 /*NAV*/
@@ -82,15 +82,6 @@ nav h2 {
     color: var(--white);
 }
 
-.cms-header {
-    background-color: var(--white);
-    color: var(--black-1);
-}
-
-.cms-header h2{   
-    padding: 12px 12px 12px 0px;
-    color: var(--black-1);
-}
 
 /*header*/
 .header {
@@ -284,7 +275,7 @@ input[type=submit] {
     color: white;
     width: 100px;
     height: 40px;
-    margin: 0px 5px 0px 5px;
+    margin: 0px 5px 50px 5px;
     text-align: center;
     line-height: 75px;
     font-size: 30px;
@@ -359,19 +350,44 @@ input[type=submit] {
     height: 100vh;
 }
 
+.cms-header {
+    background-color: var(--white);
+    color: var(--black-1);
+
+}
+
+.cms-header h2 {   
+    padding: 12px 12px 12px 0px;
+    color: var(--black-1);
+    font-size: 24px;
+    font-weight: 400;
+}
+
 /*cms-posts*/
 .cms-row {
     width: 100%;
     padding-top: 5px;
     margin-bottom: 5px;
     height: 55px;
-    border-top: 1px solid black;   
+    border-top: 1px solid var(--black-5);  
 }
 
 .cms-row__title {
-    margin-bottom: 5px;
-    font-size: 
+    margin-bottom: 6px;    
 }
+
+.cms-row__title h4 {
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--black-1);
+}
+
+.cms-row a {
+    color: var(--black-4);
+}
+
+
 
 .row span {
     font-size: 16px;
@@ -386,6 +402,15 @@ input[type=submit] {
     margin-bottom: 1em;
 }
 
+.title-error {
+    display: none;
+    color: red;
+}
+
+.post-error {
+    display: none;
+    color: red;
+}
 
 
 select,
@@ -436,7 +461,7 @@ width: 50%;
 .create-post__buttons {  
     position: absolute;
     right: 10px;
-    top: 13px;
+    top: 10px;
 }
 
 .button--post {       
@@ -458,7 +483,7 @@ width: 50%;
     padding: 8px 22px;
     text-decoration: none;
     cursor: pointer;
-    border: 1px solid var(--black-1);
+    border: 1px solid var(--black-3);
     border-radius: 3px;    
 }
 
@@ -469,6 +494,7 @@ width: 50%;
     background-color: white;    
     max-width: 700px;
     margin: auto;
+    font-family: 'Vollkorn', serif;
 }
 
 .post-container h2{
@@ -476,14 +502,20 @@ width: 50%;
     font-weight: 400;
     line-height: 1.1; 
     margin: 30px 0px 30px 0px;
-    font-family: 'Vollkorn', serif;
+    
 }
 
 .post-body {   
-    margin: 0px 30px 30px 0px; font-family: 'Vollkorn', serif;
+    margin: 0px 30px 30px 0px; 
+    
     font-size: 18px;
     line-height: 1.58;    
     color: var(--black-2);
+}
+
+.author-date {
+    font-family: 'Roboto', sans-serif;
+    
 }
 
 
@@ -653,7 +685,8 @@ width: 50%;
         margin: auto;
         display: flex;
         flex-direction: row;
-        padding: 0px;   
+        padding: 0px;  
+        height: auto;
     }
 
     .panel__left {
@@ -754,6 +787,12 @@ width: 50%;
         margin: auto;
         width: 1050px;
         height: 200px;
+    }
+
+    .cms-row__title h4 {
+        margin-bottom: 5px;
+        font-size: 20px;
+        font-weight: 400;
     }
 
 }

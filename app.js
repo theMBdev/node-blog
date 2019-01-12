@@ -39,12 +39,12 @@ MongoClient.connect('mongodb://' + userName + ':' + password + blogString, { use
 // home page
 app.get('/', (req, res) => {
 
-    
+
     db.collection('blogPosts').find().sort( { _id: -1 } ).toArray((err, result) => {
         if (err) return console.log(err)
 
         // renders index.ejs with the blogposts array
-        res.render('index.ejs', {blogPosts: result})
+        res.render('index', {blogPosts: result})
     })
 })
 
@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
 app.get('/post/:id', (req, res) => {    
     db.collection('blogPosts').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
         if (err) return console.log(err)
-        res.render('post.ejs', {blogPosts: result})
+        res.render('post', {blogPosts: result})
     })
 })
 
@@ -62,64 +62,70 @@ app.post('/blogPosts', (req, res) => {
     db.collection('blogPosts').insertOne(req.body, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
-        res.redirect('/')
+        res.redirect('/cms')
     })
 })
 
 // UPDATE blog posts
 app.post('/update-post/:id', (req, res) => {    
-    
+
     db.collection('blogPosts').updateOne({_id: ObjectId(req.params.id)}, { $set: {title : req.body.title, post : req.body.post, image: req.body.image} },{upsert: true}, (err) => {
         if(err){
             console.log(err)
             return;
         } else {
-            res.redirect('/')
+            res.redirect('/cms')
         }
     })
 })
 
 // DELETE blog post
-app.get('/delete/:id', (req, res) => {   
+app.post('/delete-post/:id', (req, res) => {   
     db.collection('blogPosts').deleteOne({"_id": ObjectId(req.params.id)}, (err, result) => {
         if (err) return console.log(err)
 
         console.log('deleted from database')        
-        res.redirect('/')
+        res.redirect('/cms')
     })
 });        
 
 
 app.get('/about', (req, res) => {    
-    res.render('about.ejs')
+    res.render('about')
 })
 
 app.get('/create-post', (req, res) => {   
-    res.render('create-post.ejs')
+    res.render('create-post')
 })
 
 app.get('/update-post/:id', (req, res) => {
     db.collection('blogPosts').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
         if (err) return console.log(err)
-        res.render('update-post.ejs', {blogPosts: result})
+        res.render('update-post', {blogPosts: result})
+    })  
+})   
+
+app.get('/delete-post/:id', (req, res) => {
+    db.collection('blogPosts').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('delete-post', {blogPosts: result})
     })  
 })   
 
 app.get('/about', (req, res) => {    
-    res.render('about.ejs')
+    res.render('about')
 })
 
 // content management center
 app.get('/cms', (req, res) => {    
-    res.render('cms.ejs')
+    res.render('cms')
 })
-     
+
 app.get('/cms-posts', (req, res) => {
     db.collection('blogPosts').find().sort( { _id: -1 } ).toArray((err, result) => {
         if (err) return console.log(err)
 
-        // renders index.ejs with the blogposts array
-        res.render('cms-posts.ejs', {blogPosts: result})
+        res.render('cms-posts', {blogPosts: result})
     })
 })
 

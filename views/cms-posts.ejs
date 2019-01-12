@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+<% include templates/header.ejs %>
     </head>
     <body>         
 
-        <nav class="cms-header"><h2 class="nav__title">Posts</h2>
+        <div class="cms-header"><h2 class="nav__title">Posts</h2>
 
             <div class="create-post__buttons">
-                <button class="button--post new-post" href="#" name="/create-post">New Post</button>                
+                <button class="button--post ajax-request" href="#" name="/create-post">New Post</button>                
             </div>
-        </nav>
+        </div>
 
         <% for(var i=0; i<blogPosts.length; i++) {%>
 
         <div class="cms-row">            
             <h4 class="cms-row__title"><%= blogPosts[i].title %></h4>  
-            <a href="/update-post/<%= blogPosts[i]._id  %>">Edit</a>
-            <a href="/delete/<%= blogPosts[i]._id  %>">Delete</a>
+            <a class="ajax-request" name="/update-post/<%= blogPosts[i]._id  %>">Edit</a>
+            <a class="ajax-request" name="/delete-post/<%= blogPosts[i]._id  %>">Delete</a>
         </div>
 
         <% } %>
@@ -26,9 +26,11 @@
 
         <script>
 
-            $( ".new-post" ).click(function() {
+            //update-post/5c38e89fa0a18248e41e64c6
+
+            $( ".ajax-request" ).click(function() {
                 console.log($(this).attr('name'));
-                $.ajax({ url: $(this).attr('name')
+                $.ajax({ url: $(this).attr('name') // need to attach id here
                         , type: 'GET'
                         , dataType: 'html'
                        })
@@ -39,6 +41,8 @@
                     console.log("Something went wrong!");
                 });
             });
+
+            
 
         </script>
 
