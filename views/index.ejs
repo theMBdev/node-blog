@@ -46,8 +46,11 @@
                     <div class="email">
                         <h3>Follow By Email</h3>
                         <p>Get all the latest post delivered straight to your inbox</p>
-                        <input class="email__input" type="text" placeholder="Email Address">
-                        <input class="email__submit" type="submit" value="SUBSCRIBE">
+                        <form action="/submit-email/" method="POST" id="submit-email-form" onsubmit="return validateForm()">
+                            <input id="email-input" class="email__input" type="text" placeholder="Email Address" name="email">
+                            <input id="select-link" class="email__submit" type="submit" value="SUBSCRIBE">
+                        </form>
+
                     </div>
                 </section>
 
@@ -84,6 +87,34 @@
             </section>
 
         </div>
+
+        <script>
+            function validateForm() {
+                var email = document.forms["submit-email-form"]["email"].value;                              
+
+                var error = false;
+                
+                if (!email.replace(/\s/g, '').length) {
+                    //$('.email-error').css("display", "inline-block");                    
+                    error = true;
+                }          
+
+                if(error === true) {
+                    return false;
+                } else {
+                    $('#select-link').val('EMAIL SUBMITTED')                    
+                }
+                
+                // ONLY ALLOW ONE SUBMISSION PER PAGE LOAD
+                  $(function(){				
+                        $('#select-link').click(function(e){
+                            e.preventDefault();
+                            console.log('select_link clicked');     
+                        })
+                    })
+
+            }
+        </script>
 
     </body>
 </html>

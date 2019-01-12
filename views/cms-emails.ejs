@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include templates/header.ejs %>
+    </head>
+    <body>         
+
+        <div class="cms-header"><h2 class="nav__title">Emails</h2>
+
+            <div class="create-post__buttons">
+                <button class="button--post ajax-request" href="#" name="/create-post">New Post</button>                
+            </div>
+        </div>
+
+        <% for(var i=0; i<emailList.length; i++) {%>
+
+        <div class="cms-row">            
+            <div class="cms-row__top">
+                <h4 class="cms-row__title"><%= emailList[i].email %></h4>
+                <p> Authenticated: <%= emailList[i].authenticated %></p>
+
+            </div>              
+            <a id="select_link" class="ajax-request" name="/delete-email/<%= emailList[i]._id  %>">Delete</a>
+        </div>
+        <% } %>
+
+        <script>
+
+            $( ".ajax-request" ).click(function() {
+                console.log('select_link clicked');
+
+                $.ajax({
+                    type: 'POST',                     
+                    contentType: 'application/json',
+                    url: $(this).attr('name'),						
+                    success: function() {                            
+                        console.log('success'); 
+
+                    }
+                });
+            });		
+
+
+        </script>
+
+
+    </body>
+
+</html>

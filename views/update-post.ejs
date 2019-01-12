@@ -25,12 +25,12 @@
 
                     <div class="input">
                         <label for="title">Title <small class="title-error">(Enter Title)</small></label>
-                        <input id="title" name="title" type="text" value="<%= blogPosts[0].title %>" />
+                        <input class="inputs" id="title" name="title" type="text" value="<%= blogPosts[0].title %>" />
                     </div>
 
                     <div class="input image-upload">
                         <label for="image">Image <small>(optional)</small></label>
-                        <input id="image-upload" name="image" type="text" value="<%= blogPosts[0].image %>"/>
+                        <input class="inputs" id="image-upload" name="image" type="text" value="<%= blogPosts[0].image %>"/>
                     </div>
 
                 </div>
@@ -47,6 +47,7 @@
         </div>
 
         <script>
+            
             function validateForm() {
                 var title = document.forms["update-form"]["title"].value;
                 var post = document.forms["update-form"]["post"].value;                        
@@ -70,6 +71,7 @@
                 if(error === true) {
                     return false;
                 }
+        
             }
 
             $( ".cancel-post" ).click(function() {

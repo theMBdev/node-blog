@@ -160,7 +160,8 @@ nav h2 {
     width: 100px;
     height: 100%;
     overflow: hidden;
-    background-color: white;    
+    overflow: hidden;
+    background-color: gainsboro;    
 }
 
 .card__container__category {
@@ -195,6 +196,8 @@ nav h2 {
     padding: 14px 22px;
     width: 100%;
     border: none;
+    height: 30px;        
+    box-shadow: 0px 2px 0px hsla(0,0%,100%,.2), inset 0px 1px 1px hsla(0,0%,0%,0.2);
 }
 
 .email__submit {
@@ -208,7 +211,7 @@ input[type=submit] {
     padding: 14px 22px;
     text-decoration: none;
     cursor: pointer;
-    margin: auto;
+    margin: auto;    
     width: 100%;
 }
 
@@ -367,9 +370,20 @@ input[type=submit] {
 .cms-row {
     width: 100%;
     padding-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     height: 55px;
     border-top: 1px solid var(--black-5);  
+}
+
+.cms-row__top p {
+     position: absolute;
+     right: 10px;
+}
+
+.cms-row__top {
+    position: relative;    
+    display: flex;
+    width: 100%;
 }
 
 .cms-row__title {
@@ -412,16 +426,26 @@ input[type=submit] {
     color: red;
 }
 
-
 select,
-textarea,
-input[type="text"] {
+textarea {
     width: 100%;
     display: block;
     border: 1px solid #eee;
     padding: 0.25em 0.5em;  
     outline: none;
     background-color: #F8F8F8;
+    box-shadow: 0px 2px 0px hsla(0,0%,100%,.15), inset 0px 1px 1px hsla(0,0%,0%,0.1);
+}
+
+.inputs {
+    width: 100%;
+    height: 25px;
+    display: block;
+    border: 1px solid #eee;
+    padding: 0.25em 0.5em;  
+    outline: none;
+    background-color: #F8F8F8;
+    box-shadow: 0px 2px 0px hsla(0,0%,100%,.15), inset 0px 1px 1px hsla(0,0%,0%,0.1);
 }
 
 .create-post {    
@@ -474,6 +498,7 @@ width: 50%;
     border: 1px solid var(--red);
     border-radius: 3px;
     margin-right: 10px;
+ 
 }
 
 .button--cancel {       
@@ -485,6 +510,7 @@ width: 50%;
     cursor: pointer;
     border: 1px solid var(--black-3);
     border-radius: 3px;    
+ 
 }
 
 
@@ -502,12 +528,12 @@ width: 50%;
     font-weight: 400;
     line-height: 1.1; 
     margin: 30px 0px 30px 0px;
-    
+
 }
 
 .post-body {   
     margin: 0px 30px 30px 0px; 
-    
+
     font-size: 18px;
     line-height: 1.58;    
     color: var(--black-2);
@@ -515,7 +541,7 @@ width: 50%;
 
 .author-date {
     font-family: 'Roboto', sans-serif;
-    
+
 }
 
 
@@ -613,9 +639,6 @@ width: 50%;
 
 @media only screen and (min-width: 700px) { 
     /*POST PAGE ONE POST*/
-    .post-container {
-
-    }
 
     .post-container h2{
         font-size: 40px;
@@ -626,7 +649,6 @@ width: 50%;
         line-height: 1.58;    
     }
 }
-
 
 /*DESKTOP*/
 @media only screen and (min-width: 1060px) {

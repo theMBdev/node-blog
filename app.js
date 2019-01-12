@@ -58,11 +58,22 @@ app.get('/post/:id', (req, res) => {
 })
 
 // CREATE blog posts
-app.post('/blogPosts', (req, res) => {
+app.post('/blogPosts', (req, res) => {      
     db.collection('blogPosts').insertOne(req.body, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/cms')
+    })
+})
+
+app.post('/submit-email', (req, res) => {    
+    req.body['authenticated'] = false;
+    db.collection('emailList').insertOne(req.body, (err, result) => {
+        if (err) return console.log(err)
+
+        console.log('saved email to database')        
+        //res.status(200).send({ success: true })
+        res.status(204).send();
     })
 })
 
@@ -87,7 +98,30 @@ app.post('/delete-post/:id', (req, res) => {
         console.log('deleted from database')        
         res.redirect('/cms')
     })
-});        
+});      
+
+// DELETE email post
+app.post('/delete-email/:id', (req, res) => {   
+    db.collection('emailList').deleteOne({"_id": ObjectId(req.params.id)}, (err, result) => {
+        if (err) return console.log(err)
+
+        console.log('deleted email from database')        
+        res.redirect('/cms')
+    })
+});    
+
+// Authenticate email
+app.post('/authenticate-email/:id', (req, res) => {    
+
+    db.collection('emailList').updateOne({_id: ObjectId(req.params.id)}, { $set: {authenticated : true} },{upsert: true}, (err) => {
+        if(err){
+            console.log(err)
+            return;
+        } else {
+            res.redirect('/cms')
+        }
+    })
+})
 
 
 app.get('/about', (req, res) => {    
@@ -124,8 +158,14 @@ app.get('/cms', (req, res) => {
 app.get('/cms-posts', (req, res) => {
     db.collection('blogPosts').find().sort( { _id: -1 } ).toArray((err, result) => {
         if (err) return console.log(err)
-
         res.render('cms-posts', {blogPosts: result})
+    })
+})
+
+app.get('/cms-emails', (req, res) => {
+    db.collection('emailList').find().sort( { _id: -1 } ).toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('cms-emails', {emailList: result})
     })
 })
 

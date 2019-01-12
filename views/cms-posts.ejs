@@ -15,7 +15,7 @@
         <% for(var i=0; i<blogPosts.length; i++) {%>
 
         <div class="cms-row">            
-            <h4 class="cms-row__title"><%= blogPosts[i].title %></h4>  
+            <h4 class="cms-row__title"><%= blogPosts[i].title %></h4>
             <a class="ajax-request" name="/update-post/<%= blogPosts[i]._id  %>">Edit</a>
             <a class="ajax-request" name="/delete-post/<%= blogPosts[i]._id  %>">Delete</a>
         </div>
