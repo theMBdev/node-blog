@@ -75,11 +75,11 @@
                     </div>
 
                     <div class="social">
-                        <div  onclick="document.location='http://www.instagram.com'" class="social__link"><img class="social__link__image" src="images/instagram.svg" alt="fa"></div>
+                        <div id="instagram-label" onclick="document.location='<%= socialPlatforms[0].instagram %>'" class="social__link"><img class="social__link__image" src="images/instagram.svg" alt="fa"></div>
 
-                        <div onclick="document.location='http://www.facebook.com'" class="social__link"><img class="social__link__image" src="images/facebook.svg" alt="fa"></div>
+                        <div id="facebook-label" onclick="document.location='<%= socialPlatforms[0].facebook %>'" class="social__link"><img class="social__link__image" src="images/facebook.svg" alt="fa"></div>
 
-                        <div  onclick="document.location='http://www.twitter.com'" class="social__link"><img class="social__link__image" src="images/twitter.svg" alt="fa"></div>              
+                        <div id="twitter-label" onclick="document.location='<%= socialPlatforms[0].twitter %>'" class="social__link"><img class="social__link__image" src="images/twitter.svg" alt="fa"></div>
                     </div>
 
                 </section>
@@ -93,7 +93,7 @@
                 var email = document.forms["submit-email-form"]["email"].value;                              
 
                 var error = false;
-                
+
                 if (!email.replace(/\s/g, '').length) {
                     //$('.email-error').css("display", "inline-block");                    
                     error = true;
@@ -104,16 +104,18 @@
                 } else {
                     $('#select-link').val('EMAIL SUBMITTED')                    
                 }
-                
+
                 // ONLY ALLOW ONE SUBMISSION PER PAGE LOAD
-                  $(function(){				
-                        $('#select-link').click(function(e){
-                            e.preventDefault();
-                            console.log('select_link clicked');     
-                        })
+                $(function(){				
+                    $('#select-link').click(function(e){
+                        e.preventDefault();
+                        console.log('select_link clicked');     
                     })
+                })
 
             }
+
+
         </script>
 
     </body>
