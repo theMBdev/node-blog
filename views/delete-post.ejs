@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-<% include templates/header.ejs %>
+        <% include templates/header.ejs %>
 
     </head>
     <body>
@@ -32,10 +32,11 @@
         <script>
             $( ".cancel-post" ).click(function() {
                 console.log($(this).attr('name'));
-                $.ajax({ url: $(this).attr('name')
-                        , type: 'GET'
-                        , dataType: 'html'
-                       })
+                $.ajax({ 
+                    url: $(this).attr('name'),
+                    type: 'GET',
+                    dataType: 'html'
+                })
                     .done(function(data) {
                     $('#container').html(data);
                 })
@@ -43,7 +44,7 @@
                     console.log("Something went wrong!");
                 });
             });
-                                    
+
         </script>
     </body>
 </html>

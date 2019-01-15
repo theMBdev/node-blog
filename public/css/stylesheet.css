@@ -14,8 +14,7 @@
     --super-light-grey: hsla(0, 0%, 93%, 1);
     --lightest-blue: hsla(223, 47%, 97%, 1);
 }
-/*var(--main-bg-color)*/
-
+/*mediumturquoise*/
 
 body {
     padding: 0px;
@@ -66,7 +65,7 @@ a {
 }
 
 .index {
-    background-color: var(--lightest-blue); 
+    background-color: var(--main-bg-color); 
 }
 
 /*NAV*/

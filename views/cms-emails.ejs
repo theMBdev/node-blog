@@ -29,13 +29,19 @@
             $( ".ajax-request" ).click(function() {
                 console.log('select_link clicked');
 
+                // colour and fade away the row that is been deleted
+                $(this).parents('.cms-row').css('background-color','var(--red)');
+                $(this).closest('.cms-row').fadeOut(600, function(){ 
+                    $(this).remove();
+                });
+
                 $.ajax({
+                    url: $(this).attr('name'),	
                     type: 'POST',                     
                     contentType: 'application/json',
-                    url: $(this).attr('name'),						
+
                     success: function() {                            
                         console.log('success'); 
-
                     }
                 });
             });		
