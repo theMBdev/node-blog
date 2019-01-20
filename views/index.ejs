@@ -24,7 +24,9 @@
                             <h4 class="card__title"><%= blogPosts[i].title %></h4>
                             <p class="card__body"><%= blogPosts[i].post %></p>
                         </a>
-                        <div class="card__author">Martin Brown &middot; Feb 28, 2018</div>
+                        <div class="card__author">Martin Brown &middot; <%= moment(blogPosts[i].date).format('MMM DD YYYY'); %>
+
+                        </div>
                         <div class="card__date"></div>
                     </div>
 
@@ -44,12 +46,18 @@
             <section class="panel__right">
                 <section class="side__left">
                     <div class="email">
-                        <h3>Follow By Email</h3>
-                        <p>Get all the latest post delivered straight to your inbox</p>
-                        <form action="/submit-email/" method="POST" id="submit-email-form" onsubmit="return validateForm()">
-                            <input id="email-input" class="email__input" type="text" placeholder="Email Address" name="email">
-                            <input id="select-link" class="email__submit" type="submit" value="SUBSCRIBE">
-                        </form>
+                        <div class="front">
+                            <h3 id="email__title">Follow By Email</h3>
+                            <p id="email__body" >Get all the latest post delivered straight to your inbox</p>
+                            <form action="/submit-email/" method="POST" id="submit-email-form" onsubmit="return validateForm()">
+                                <input id="email-input" class="email__input" type="email" placeholder="Email Address" name="email">
+                                <input id="email__submit" class="email__submit" type="submit" value="SUBSCRIBE">
+                            </form>
+                        </div>
+
+                        <div class="front back">An Email confirmation has been sent</div>
+
+
 
                     </div>
                 </section>
@@ -90,7 +98,7 @@
 
         <script>
             function validateForm() {
-                var email = document.forms["submit-email-form"]["email"].value;                              
+                let email = document.forms["submit-email-form"]["email"].value;                              
 
                 var error = false;
 
@@ -102,18 +110,22 @@
                 if(error === true) {
                     return false;
                 } else {
-                    $('#select-link').val('EMAIL SUBMITTED')                    
+                    $( ".email" ).addClass( "flip" );
                 }
+
+
 
                 // ONLY ALLOW ONE SUBMISSION PER PAGE LOAD
                 $(function(){				
-                    $('#select-link').click(function(e){
+                    $('#email__submit').click(function(e){
                         e.preventDefault();
                         console.log('select_link clicked');     
                     })
                 })
 
             }
+
+
 
 
         </script>

@@ -17,6 +17,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 // ejs setup 
 app.set('view engine', 'ejs');
 
+// for date formatting
+var moment = require('moment');
+
 // username and password imported
 var configFile = require('./configFile.js');
 userName = configFile.userName;
@@ -39,6 +42,19 @@ MongoClient.connect('mongodb://' + userName + ':' + password + blogString, { use
     })
 })
 
+
+// email credentials
+var transporter = nodemailer.createTransport({
+    service: 'hotmail',
+    auth: {
+        user: emailUser,
+        pass: emailPass
+    }
+});
+
+
+// ROUTES
+
 // home page
 app.get('/', (req, res) => {
     db.collection('blogPosts').find().sort( { _id: -1 } ).toArray((err, result) => {
@@ -46,191 +62,187 @@ app.get('/', (req, res) => {
 
         db.collection('socialPlatforms').find().sort( { _id: -1 } ).toArray((err, result2) => {
             if (err) return console.log(err)
-            
-                // renders index.ejs with the blogposts array
-                res.render('index', {blogPosts: result, socialPlatforms: result2})
-            })
+
+            // renders index.ejs with the blogposts array
+            res.render('index', { moment: moment, blogPosts: result, socialPlatforms: result2})
         })
     })
+})
 
-    // Main post view
-    // get individual post using posts id
-    app.get('/post/:id', (req, res) => {    
-        db.collection('blogPosts').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
-            if (err) return console.log(err)
-            res.render('post', {blogPosts: result})
-        })
+// Main post view
+// get individual post using posts id
+app.get('/post/:id', (req, res) => {    
+    db.collection('blogPosts').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('post', {moment: moment, blogPosts: result})
     })
+})
 
-    // CREATE blog posts
-    app.post('/blogPosts', (req, res) => {      
-        db.collection('blogPosts').insertOne(req.body, (err, result) => {
-            if (err) return console.log(err)
-            console.log('saved to database')
-            res.redirect('/cms')
-        })
+// CREATE blog posts
+app.post('/blogPosts', (req, res) => {      
+    var date = new Date();
+    req.body['date'] = date
+
+    db.collection('blogPosts').insertOne(req.body, (err, result) => { 
+        if (err) return console.log(err)
+
+        console.log('saved to database')
+        res.redirect('/cms')
     })
+})
 
-    // SUBMIT email
-    app.post('/submit-email', (req, res) => {    
-        req.body['authenticated'] = false;
-        db.collection('emailList').insertOne(req.body, (err, result) => {
-            if (err) return console.log(err)
+// SUBMIT email
+app.post('/submit-email', (req, res) => {    
+    req.body['authenticated'] = false
+    db.collection('emailList').insertOne(req.body, (err, result) => {
+        if (err) return console.log(err)
 
-            console.log('saved email to database')        
-            console.log(req.body)        
-            res.status(204).send();
+        console.log('saved email to database')        
+        console.log(req.body)        
+        res.status(204).send();
 
-            // send authentication email
-            var mailOptions = {
-                from: emailUser,
-                to: req.body.email,
-                subject: 'Email authentication',
-                text: 'http://localhost:3000/authenticate-email/' + req.body._id            
-            };
+        // send authentication email
+        var mailOptions = {
+            from: emailUser,
+            to: req.body.email,
+            subject: 'Email authentication',
+            text: 'http://localhost:3000/authenticate-email/' + req.body._id            
+        };
 
-            transporter.sendMail(mailOptions, function(error, info){
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log('Email sent: ' + info.response);
-                }
-            });
-        })
-    })
-
-    // UPDATE blog posts
-    app.post('/update-post/:id', (req, res) => {    
-
-        db.collection('blogPosts').updateOne({_id: ObjectId(req.params.id)}, { $set: {title : req.body.title, post : req.body.post, image: req.body.image} },{upsert: true}, (err) => {
-            if(err){
-                console.log(err)
-                return;
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error);
             } else {
-                res.redirect('/cms')
+                console.log('Email sent: ' + info.response);
             }
-        })
+        });
     })
+})
 
-    // UPDATE social links
-    app.post('/update-social/:id', (req, res) => {    
+// UPDATE blog posts
+app.post('/update-post/:id', (req, res) => {    
 
-        db.collection('socialPlatforms').updateOne({_id: ObjectId(req.params.id)}, { $set: {facebook : req.body.facebook, twitter : req.body.twitter, instagram: req.body.instagram} },{upsert: true}, (err) => {
-            if(err){
-                console.log(err)
-                return;
-            } else {
-                res.redirect('/cms')
-            }
-        })
-    })
-
-    // DELETE blog post
-    app.post('/delete-post/:id', (req, res) => {   
-        db.collection('blogPosts').deleteOne({"_id": ObjectId(req.params.id)}, (err, result) => {
-            if (err) return console.log(err)
-
-            console.log('deleted from database')        
+    db.collection('blogPosts').updateOne({_id: ObjectId(req.params.id)}, { $set: {title : req.body.title, post : req.body.post, image: req.body.image} },{upsert: true}, (err) => {
+        if(err){
+            console.log(err)
+            return;
+        } else {
             res.redirect('/cms')
-        })
-    });      
-
-    // DELETE email post
-    app.post('/delete-email/:id', (req, res) => {   
-        db.collection('emailList').deleteOne({"_id": ObjectId(req.params.id)}, (err, result) => {
-            if (err) return console.log(err)
-
-            console.log('deleted email from database')        
-            res.redirect('/cms')
-        })
-    });    
-
-    // Authenticate email
-    app.post('/authenticate-email/:id', (req, res) => {    
-
-        db.collection('emailList').updateOne({_id: ObjectId(req.params.id)}, { $set: {authenticated : true} }, {upsert: true}, (err) => {
-            if(err){
-                console.log(err)
-                return;
-            } else {
-                res.redirect('/')
-            }
-        })
-    })
-
-
-    app.get('/about', (req, res) => {    
-        res.render('about')
-    })
-
-    // post page to enter the post information
-    app.get('/create-post', (req, res) => {   
-        res.render('create-post')
-    })
-
-    // update post page to enter the update information
-    app.get('/update-post/:id', (req, res) => {
-        db.collection('blogPosts').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
-            if (err) return console.log(err)
-            res.render('update-post', {blogPosts: result})
-        })  
-    })   
-
-    // confirm deleting post
-    app.get('/delete-post/:id', (req, res) => {
-        db.collection('blogPosts').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
-            if (err) return console.log(err)
-            res.render('delete-post', {blogPosts: result})
-        })  
-    })   
-
-    // page that calls the post request to authenticate email
-    app.get('/authenticate-email/:id', (req, res) => {
-        db.collection('emailList').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
-            if (err) return console.log(err)
-            res.render('authenticate-email', {emailList: result})
-        })  
-    })   
-
-    // content management center
-    app.get('/cms', (req, res) => {    
-        res.render('cms')
-    })
-
-    // display list of posts
-    app.get('/cms-posts', (req, res) => {
-        db.collection('blogPosts').find().sort( { _id: -1 } ).toArray((err, result) => {
-            if (err) return console.log(err)
-            res.render('cms-posts', {blogPosts: result})
-        })
-    })
-
-    // display list of emails
-    app.get('/cms-emails', (req, res) => {
-        db.collection('emailList').find().sort( { _id: -1 } ).toArray((err, result) => {
-            if (err) return console.log(err)
-            res.render('cms-emails', {emailList: result})
-        })
-    })
-
-    // display social page
-    app.get('/cms-social', (req, res) => {
-
-
-        let myId = '5c3e07532cb5fd2d78cb9ae4';
-
-        db.collection('socialPlatforms').find({"_id": ObjectId(myId)}).toArray((err, result) => {
-            if (err) return console.log(err)
-
-            res.render('cms-social', {socialPlatforms: result, myId: myId})
-        })
-    })
-
-    // email credentials
-    var transporter = nodemailer.createTransport({
-        service: 'hotmail',
-        auth: {
-            user: emailUser,
-            pass: emailPass
         }
-    });
+    })
+})
+
+// UPDATE social links
+app.post('/update-social/:id', (req, res) => {    
+
+    db.collection('socialPlatforms').updateOne({_id: ObjectId(req.params.id)}, { $set: {facebook : req.body.facebook, twitter : req.body.twitter, instagram: req.body.instagram} },{upsert: true}, (err) => {
+        if(err){
+            console.log(err)
+            return;
+        } else {
+            res.redirect('/cms')
+        }
+    })
+})
+
+// DELETE blog post
+app.post('/delete-post/:id', (req, res) => {   
+    db.collection('blogPosts').deleteOne({"_id": ObjectId(req.params.id)}, (err, result) => {
+        if (err) return console.log(err)
+
+        console.log('deleted from database')        
+        res.redirect('/cms')
+    })
+});      
+
+// DELETE email post
+app.post('/delete-email/:id', (req, res) => {   
+    db.collection('emailList').deleteOne({"_id": ObjectId(req.params.id)}, (err, result) => {
+        if (err) return console.log(err)
+
+        console.log('deleted email from database')        
+        res.redirect('/cms')
+    })
+});    
+
+// Authenticate email
+app.post('/authenticate-email/:id', (req, res) => {    
+
+    db.collection('emailList').updateOne({_id: ObjectId(req.params.id)}, { $set: {authenticated : true} }, {upsert: true}, (err) => {
+        if(err){
+            console.log(err)
+            return;
+        } else {
+            res.redirect('/')
+        }
+    })
+})
+
+
+app.get('/about', (req, res) => {    
+    res.render('about')
+})
+
+// post page to enter the post information
+app.get('/create-post', (req, res) => {   
+    res.render('create-post')
+})
+
+// update post page to enter the update information
+app.get('/update-post/:id', (req, res) => {
+    db.collection('blogPosts').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('update-post', {blogPosts: result})
+    })  
+})   
+
+// confirm deleting post
+app.get('/delete-post/:id', (req, res) => {
+    db.collection('blogPosts').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('delete-post', {blogPosts: result})
+    })  
+})   
+
+// page that calls the post request to authenticate email
+app.get('/authenticate-email/:id', (req, res) => {
+    db.collection('emailList').find({"_id": ObjectId(req.params.id)}).toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('authenticate-email', {emailList: result})
+    })  
+})   
+
+// content management center
+app.get('/cms', (req, res) => {    
+    res.render('cms')
+})
+
+// display list of posts
+app.get('/cms-posts', (req, res) => {
+    db.collection('blogPosts').find().sort( { _id: -1 } ).toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('cms-posts', {blogPosts: result})
+    })
+})
+
+// display list of emails
+app.get('/cms-emails', (req, res) => {
+    db.collection('emailList').find().sort( { _id: -1 } ).toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('cms-emails', {emailList: result})
+    })
+})
+
+// display social page
+app.get('/cms-social', (req, res) => {
+
+
+    let myId = '5c3e07532cb5fd2d78cb9ae4';
+
+    db.collection('socialPlatforms').find({"_id": ObjectId(myId)}).toArray((err, result) => {
+        if (err) return console.log(err)
+
+        res.render('cms-social', {socialPlatforms: result, myId: myId})
+    })
+})
+

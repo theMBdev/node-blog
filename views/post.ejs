@@ -15,9 +15,8 @@
            
             <p class="post-body"><%= blogPosts[0].post %></p>  
             
-             <div class="author-date">Martin Brown &middot; Feb 28, 2018</div>
+             <div class="author-date">Martin Brown &middot; <%= moment(blogPosts[0].date).format('MMM DD YYYY'); %></div>
         </div>
-
 
 
     </body>

@@ -42,8 +42,7 @@ h3 {
 }
 
 h4 {
-    font-size: 18px;
-
+    font-size: 16px;
 }
 
 h5 {
@@ -63,6 +62,7 @@ a {
     text-decoration: none;
     cursor: pointer; 
 }
+
 
 .index {
     background-color: var(--main-bg-color); 
@@ -107,7 +107,7 @@ nav h2 {
 }
 
 .card__title {
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 
 .card__body {
@@ -118,7 +118,6 @@ nav h2 {
     display: -webkit-box!important;
     -webkit-line-clamp: 2!important;
     -webkit-box-orient: vertical;
-    padding-right: 10px;
 }
 
 .card__author {
@@ -145,6 +144,11 @@ nav h2 {
 .card__left {
     width: calc(100% - 100px);    
     float: left;
+    padding-right: 20px;
+}
+
+.card__left p {
+    color: var(--grey-4);
 }
 
 .card__right {    
@@ -181,6 +185,9 @@ nav h2 {
     margin-top: 20px;
     padding: 20px;
     position: relative;
+
+    transform-style: preserve-3d;
+    transition: all 1s ease-in-out;
 }
 
 .email p {
@@ -214,6 +221,36 @@ input[type=submit] {
     margin: auto;    
     width: 100%;
 }
+
+.flip {
+    transform: rotateX(-180deg);
+}
+
+.email {
+    height: 240px;
+}
+
+.email .front {
+    backface-visibility: hidden;
+    overflow: hidden;
+}
+
+.email .back {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    line-height: 240px;
+    text-align: center;
+    transform: rotateX(180deg);
+}
+
+.back {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+
 
 /*side headers*/
 .side-header {
@@ -268,8 +305,6 @@ input[type=submit] {
 .social {
     display: flex; /* or inline-flex */
     flex-wrap: wrap;
-    background-color: white;
-
     justify-content: flex-start;
 }
 
@@ -402,12 +437,11 @@ margin-right: 5px;
 }
 
 .cms-row__title {
-    margin-bottom: 6px;    
+    margin-bottom: 6px;    font-size: 18px;
 }
 
 .cms-row__title h4 {
-    margin-bottom: 5px;
-    font-size: 20px;
+    margin-bottom: 5px;    
     font-weight: 400;
     color: var(--black-1);
 }
@@ -578,19 +612,26 @@ width: 50%;
     .panel {
         padding: 10px;   
     }
+
     .card {
         height: 130px;
     }
 
-
     .card__left {
         width: calc(100% - 130px);
         float: left;
+        padding-right: 40px;
+        line-height: 1.35em;
+    }
+
+    .card__title {
+        margin-bottom: 5px;
     }
 
     .card__image {
         width: 130px;        
     }
+
 
     .card__container {
         width: 130px;
@@ -601,7 +642,6 @@ width: 50%;
     .card__container__category {
         display: none;
     }
-
 
     /*email*/
     .email {
@@ -649,18 +689,13 @@ width: 50%;
         margin-left: 5px;
     }
 
-
     /*cms*/
-
     .create-post {    
         margin: auto;
         max-width: 700px;
         min-width: 300px;
         height: 200px;
     }
-
-
-
 
 }
 
@@ -672,8 +707,7 @@ width: 50%;
     }
 
     .post-body {   
-        font-size: 20px;
-        line-height: 1.58;    
+        font-size: 20px; 
     }
 }
 
@@ -681,7 +715,7 @@ width: 50%;
 @media only screen and (min-width: 1060px) {
 
     h1 {
-        font-size: 46px;
+        font-size: 34px;
     }
 
     h2 {
@@ -763,7 +797,7 @@ width: 50%;
         margin-bottom: 15px;
         white-space: pre-wrap;
         overflow: visible;
-        height: 100px;
+        height: 100px;        
     }
 
     .card__author {
