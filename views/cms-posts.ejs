@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-<% include templates/header.ejs %>
+        <% include templates/header.ejs %>
     </head>
     <body>         
 
-        <div class="cms-header"><h2 class="nav__title">Posts</h2>
+        <div class="cms-header-main">
+            <h2 class="nav__title">Posts</h2>
 
             <div class="create-post__buttons">
                 <button class="button--post ajax-request" href="#" name="/create-post">New Post</button>                
@@ -40,7 +41,7 @@
                 });
             });
 
-            
+
 
         </script>
 

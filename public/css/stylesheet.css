@@ -69,11 +69,59 @@ a {
 }
 
 /*NAV*/
-nav {    
-    background-color: var(--black-1);
-    display: flex;
-    justify-content: flex end;
-    position: relative;
+nav {
+
+}
+
+nav .nav__title {
+    font-weight: 600;
+}
+
+.nav__title {
+    display: block;
+    color: white;
+    
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.nav .cog-icon {
+    vertical-align: middle;
+    max-height: 25px;
+    max-width: 160px;
+
+}
+
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    height: 45px;
+}
+
+.nav li {
+    float: left; 
+}
+
+.nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 12px 16px;
+    text-decoration: none;
+}
+
+.nav a:hover:not(.active) {
+    background-color: #111;
+}
+
+.nav img {    
+    vertical-align: middle;
+    max-height: 45px;
+    max-width: 160px;
+    height: 20px;
 }
 
 nav h2 {
@@ -107,7 +155,8 @@ nav h2 {
 }
 
 .card__title {
-    margin-bottom: 2px;
+    margin-bottom: 5px;
+
 }
 
 .card__body {
@@ -123,7 +172,8 @@ nav h2 {
 .card__author {
     margin-bottom: 2px;   
     position: absolute;
-    bottom: 0px;    
+    bottom: 0px;  
+    font-size: 14px;
 }
 
 .card__date {
@@ -403,10 +453,12 @@ margin-right: 5px;
     height: 100vh;
 }
 
-.cms-header {
-    background-color: var(--white);
-    color: var(--black-1);
 
+.cms-header-main h2 {   
+    padding: 12px 12px 12px 0px;
+    color: var(--black-1);
+    font-size: 24px;
+    font-weight: 400;
 }
 
 .cms-header h2 {   
@@ -501,7 +553,16 @@ textarea {
     margin: auto;
     max-width: 500px;
     min-width: 300px;
-    height: 200px;
+    height: 200px; 
+}
+
+.cms-header {
+    background-color: var(--white);
+    color: var(--black-1);    
+
+    margin: auto;    
+    max-width: 500px;
+    min-width: 300px;
 }
 
 .create-post__top {
@@ -532,9 +593,10 @@ width: 50%;
 */
 
 .create-post__buttons {  
+    float: right;
     position: absolute;
-    right: 10px;
     top: 10px;
+    right: 10px;
 }
 
 .button--post {       
@@ -546,14 +608,14 @@ width: 50%;
     cursor: pointer;
     border: 1px solid var(--red);
     border-radius: 3px;
-    margin-right: 10px;
+    margin-right: 0px;
 
 }
 
 .button--cancel {       
     background-color: white;
     border: none;
-    color: var(--black-1);
+    color: var(--grey-3);
     padding: 8px 22px;
     text-decoration: none;
     cursor: pointer;
@@ -589,12 +651,10 @@ width: 50%;
     font-weight: 400;
     line-height: 1.1; 
     margin: 30px 0px 30px 0px;
-
 }
 
 .post-body {   
     margin: 0px 30px 30px 0px; 
-
     font-size: 18px;
     line-height: 1.58;    
     color: var(--text-grey);
@@ -604,7 +664,6 @@ width: 50%;
     font-family: 'Roboto', sans-serif;
 
 }
-
 
 /*TABLET*/
 @media only screen and (min-width: 600px) {
@@ -625,7 +684,8 @@ width: 50%;
     }
 
     .card__title {
-        margin-bottom: 5px;
+        margin-bottom: 8px;
+        font-size: 20px;        
     }
 
     .card__image {
@@ -695,12 +755,49 @@ width: 50%;
         max-width: 700px;
         min-width: 300px;
         height: 200px;
+
+    }
+
+    .cms-header {
+        background-color: var(--white);
+        color: var(--black-1);    
+
+        margin: auto;    
+        max-width: 700px;
+        min-width: 300px;
+    }
+
+    .cms-header-main {
+        background-color: var(--white);
+        color: var(--black-1);    
+        margin: auto;    
+        max-width: 100%;
+        min-width: 300px;
+        display: inline-block;
     }
 
 }
 
 @media only screen and (min-width: 700px) { 
     /*POST PAGE ONE POST*/
+
+    .cms-header {
+        background-color: var(--white);
+        color: var(--black-1);    
+        margin: auto;    
+        max-width: 700px;
+        min-width: 300px;
+    }
+
+    .cms-header-main {
+        background-color: var(--white);
+        color: var(--black-1);    
+        margin: auto;    
+        max-width: 100%;
+        min-width: 300px;
+        display: inline-block;
+    }
+
 
     .post-container h2{
         font-size: 40px;
@@ -790,7 +887,8 @@ width: 50%;
     }
 
     .card__title {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
+        font-size: 20px;
     }
 
     .card__body {
@@ -870,6 +968,7 @@ width: 50%;
         margin: auto;
         width: 1050px;
         height: 200px;
+
     }
 
     .cms-row__title h4 {
@@ -877,5 +976,16 @@ width: 50%;
         font-size: 20px;
         font-weight: 400;
     }
+
+}
+.nav__title {
+
+}
+
+.cms-header-top {
+
+}
+
+.nav-link {
 
 }

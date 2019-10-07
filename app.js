@@ -45,11 +45,11 @@ MongoClient.connect('mongodb://' + userName + ':' + password + blogString, { use
 
 // email credentials
 var transporter = nodemailer.createTransport({
-    service: 'hotmail',
-    auth: {
-        user: emailUser,
-        pass: emailPass
-    }
+        service: 'gmail',
+        auth: {
+            user: emailUser,
+            pass: emailPass
+        }
 });
 
 
