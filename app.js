@@ -37,19 +37,22 @@ MongoClient.connect('mongodb://' + userName + ':' + password + blogString, { use
     if (err) return console.log(err)
     db = client.db('node-blog') // database name
 
-    app.listen(3000, () => {
+    const port = process.env.PORT || 3000;
+
+    app.listen(port, () => {
         console.log('listening on 3000')
     })
+
 })
 
 
 // email credentials
 var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: emailUser,
-            pass: emailPass
-        }
+    service: 'gmail',
+    auth: {
+        user: emailUser,
+        pass: emailPass
+    }
 });
 
 
