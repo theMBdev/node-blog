@@ -4,20 +4,14 @@
         <base href="/">
         <% include templates/header.ejs %>
     </head>
-    <body>       
-
+    <body> 
          <% include templates/navbar.ejs %>
-
         <div class="post-container">
             <div class="post-title">
                 <h2 class=""><%= blogPosts[0].title %></h2>
-            </div>        
-           
-            <p class="post-body"><%= blogPosts[0].post %></p>  
-            
+            </div>
+            <p class="post-body"><%= blogPosts[0].post %></p>
              <div class="author-date">Martin Brown &middot; <%= moment(blogPosts[0].date).format('MMM DD YYYY'); %></div>
         </div>
-
-
     </body>
 </html>

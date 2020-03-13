@@ -2,12 +2,9 @@
 <html lang="en">
     <head>
         <% include templates/header.ejs %>
-
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-
     </head>
     <body>
-
         <div class="cms-header">
             <h2 class="nav__title">Create Post</h2>
 
@@ -18,13 +15,8 @@
         </div>
 
         <div class="create-post">
-
-            <form name="post-form" action="/blogPosts" method="POST" id="post-form" onsubmit="return validateForm()"><!--
-<input type="text" placeholder="title" name="title">
-<input type="text" placeholder="post" name="post">-->
-
+            <form name="post-form" action="/blogPosts" method="POST" id="post-form" onsubmit="return validateForm()">
                 <div class="create-post__top">
-
                     <div class="input">
                         <label for="title">Title <small class="title-error">(Enter Title)</small></label>
                         <input class="inputs" id="title" name="title" type="text" />
@@ -34,28 +26,15 @@
                         <label for="image">Image <small>(optional)</small></label>
                         <input class="inputs" id="image-upload" name="image" type="text" />
                     </div>
-
                 </div>
 
                 <div class="create-post__bottom">
-
-
                     <div class="input">
                         <label for="post">Post <small class="post-error">(Enter Post)</small></label>               
                         <textarea name="post" rows="8" cols="50"></textarea>
                     </div>
-
-
-
-
-
                 </div>
-
-
-
-
             </form>
-
         </div>
 
         <script>            

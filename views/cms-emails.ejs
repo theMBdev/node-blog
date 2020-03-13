@@ -18,14 +18,12 @@
             <div class="cms-row__top">
                 <h5 class="cms-row__title"><%= emailList[i].email %></h5>
                 <p> Authenticated: <%= emailList[i].authenticated %></p>
-
             </div>              
             <a id="select_link" class="ajax-request" name="/delete-email/<%= emailList[i]._id  %>">Delete</a>
         </div>
         <% } %>
 
         <script>
-
             $( ".ajax-request" ).click(function() {
                 console.log('select_link clicked');
 
@@ -44,9 +42,7 @@
                         console.log('success'); 
                     }
                 });
-            });		
-
-
+            });	
         </script>
 
 

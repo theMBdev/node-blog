@@ -3,19 +3,12 @@
     <head>
         <% include templates/header.ejs %>
     </head>
-
     <body class="index">
-
         <% include templates/navbar.ejs %>
-
         <h1 class="header">MY BLOG</h1>
-
         <div class="panel">
-
             <section class="panel__left">
-
                 <% for(var i=0; i<blogPosts.length; i++) {%>
-
                 <div class="card">
                     <div class="card__left">
                         <a href="/post/<%= blogPosts[i]._id  %>">
@@ -23,7 +16,6 @@
                             <p class="card__body"><%= blogPosts[i].post %></p>
                         </a>
                         <div class="card__author">Martin Brown &middot; <%= moment(blogPosts[i].date).format('MMM DD YYYY'); %>
-
                         </div>
                         <div class="card__date"></div>
                     </div>
@@ -35,11 +27,8 @@
                         </div>
                     </div>
                 </div>
-
                 <% } %>
-
             </section>
-
 
             <section class="panel__right">
                 <section class="side__left">
@@ -52,20 +41,14 @@
                                 <input id="email__submit" class="email__submit" type="submit" value="SUBSCRIBE">
                             </form>
                         </div>
-
                         <div class="front back">An Email confirmation has been sent</div>
-
-
-
                     </div>
                 </section>
 
                 <section class="side__right">
-
                     <div class="side-header">
                         <h6>SOCIAL LINKS</h6>
                     </div>
-
                     <div class="social">
                         <div id="instagram-label" onclick="document.location='<%= socialPlatforms[0].instagram %>'" class="social__link"><img class="social__link__image" src="images/instagram.svg" alt="fa"></div>
 
@@ -73,11 +56,8 @@
 
                         <div id="twitter-label" onclick="document.location='<%= socialPlatforms[0].twitter %>'" class="social__link"><img class="social__link__image" src="images/twitter.svg" alt="fa"></div>
                     </div>
-
                 </section>
-
             </section>
-
         </div>
 
         <script>
@@ -97,8 +77,6 @@
                     $( ".email" ).addClass( "flip" );
                 }
 
-
-
                 // ONLY ALLOW ONE SUBMISSION PER PAGE LOAD
                 $(function(){				
                     $('#email__submit').click(function(e){
@@ -106,12 +84,7 @@
                         console.log('select_link clicked');     
                     })
                 })
-
             }
-
-
-
-
         </script>
 
     </body>

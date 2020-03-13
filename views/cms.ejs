@@ -7,38 +7,23 @@
                 integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
                 crossorigin="anonymous">
         </script>
-
     </head>
-    <body>       
-
-
+    <body> 
         <div class="cms">
-
             <div class="side-nav">
-
-                <h3 class="side-nav__title">BLOG <span class="side-nav__title--cms">cms</span></h3>            
-
+                <h3 class="side-nav__title">BLOG <span class="side-nav__title--cms">cms</span></h3>
                 <a href="/" class="" name="">Home</a>
                 <a href="#" class="cms-link" name="/cms-posts">Posts</a>
                 <a href="#" class="cms-link" name="/cms-emails">Emails</a>
                 <a href="#" class="cms-link" name="/cms-social">Social</a>
-
             </div>
 
             <div class="main">
-
-
-
                 <div id="container"></div>
             </div>
-
-
         </div>
 
-
-
         <script>
-
             $( ".cms-link" ).click(function() {
                 console.log($(this).attr('name'));
                 $.ajax({ url: $(this).attr('name')
@@ -64,10 +49,6 @@
                     console.log("Something went wrong!");
                 });
             });
-     
-
-
-
         </script>
     </body>
 

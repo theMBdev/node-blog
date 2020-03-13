@@ -3,10 +3,8 @@
     <head>
         <% include templates/header.ejs %>
     </head>
-    <body>         
-
+    <body> 
         <div class="cms-header-main"><h2 class="nav__title">Social</h2>
-
             <div class="create-post__buttons">
                 <button class="button--post" type="submit" form="update-social">Update</button>
             </div>
@@ -15,7 +13,6 @@
         <p class="header-instruction">Enter the links to your social media accounts eg: <i>https://www.facebook.com/user1</i></p>
 
         <form action="/update-social/<%= myId %>" method="POST" id="update-social">
-
             <div class="social-entry">
                 <label for="facebook">Facebook</label>
                 <input class="inputs" name="facebook" type="text" value="<%= socialPlatforms[0].facebook %>"/>
@@ -30,9 +27,7 @@
                 <label for="instagram">Instagram</label>
                 <input class="inputs" name="instagram" type="text" value="<%= socialPlatforms[0].instagram %>"/>
             </div>
-
         </form>
-
 
         <script>
             $( ".ajax-request" ).click(function() {
@@ -44,12 +39,9 @@
                     url: $(this).attr('name'),						
                     success: function() {                            
                         console.log('success'); 
-
                     }
                 });
-            });		
-            
-
+            });	 
         </script>
 
 

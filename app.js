@@ -42,9 +42,7 @@ MongoClient.connect('mongodb://' + userName + ':' + password + blogString, { use
     app.listen(port, () => {
         console.log('listening on 3000')
     })
-
 })
-
 
 // email credentials
 var transporter = nodemailer.createTransport({
@@ -62,7 +60,6 @@ var transporter = nodemailer.createTransport({
 app.get('/', (req, res) => {
     db.collection('blogPosts').find().sort( { _id: -1 } ).toArray((err, result) => {
         if (err) return console.log(err)
-
         db.collection('socialPlatforms').find().sort( { _id: -1 } ).toArray((err, result2) => {
             if (err) return console.log(err)
 
@@ -88,7 +85,6 @@ app.post('/blogPosts', (req, res) => {
 
     db.collection('blogPosts').insertOne(req.body, (err, result) => { 
         if (err) return console.log(err)
-
         console.log('saved to database')
         res.redirect('/cms')
     })
@@ -98,8 +94,7 @@ app.post('/blogPosts', (req, res) => {
 app.post('/submit-email', (req, res) => {    
     req.body['authenticated'] = false
     db.collection('emailList').insertOne(req.body, (err, result) => {
-        if (err) return console.log(err)
-
+        if (err) return console.log(err)        
         console.log('saved email to database')        
         console.log(req.body)        
         res.status(204).send();
@@ -123,8 +118,7 @@ app.post('/submit-email', (req, res) => {
 })
 
 // UPDATE blog posts
-app.post('/update-post/:id', (req, res) => {    
-
+app.post('/update-post/:id', (req, res) => {
     db.collection('blogPosts').updateOne({_id: ObjectId(req.params.id)}, { $set: {title : req.body.title, post : req.body.post, image: req.body.image} },{upsert: true}, (err) => {
         if(err){
             console.log(err)
@@ -136,8 +130,7 @@ app.post('/update-post/:id', (req, res) => {
 })
 
 // UPDATE social links
-app.post('/update-social/:id', (req, res) => {    
-
+app.post('/update-social/:id', (req, res) => {
     db.collection('socialPlatforms').updateOne({_id: ObjectId(req.params.id)}, { $set: {facebook : req.body.facebook, twitter : req.body.twitter, instagram: req.body.instagram} },{upsert: true}, (err) => {
         if(err){
             console.log(err)
@@ -152,7 +145,6 @@ app.post('/update-social/:id', (req, res) => {
 app.post('/delete-post/:id', (req, res) => {   
     db.collection('blogPosts').deleteOne({"_id": ObjectId(req.params.id)}, (err, result) => {
         if (err) return console.log(err)
-
         console.log('deleted from database')        
         res.redirect('/cms')
     })
@@ -162,15 +154,13 @@ app.post('/delete-post/:id', (req, res) => {
 app.post('/delete-email/:id', (req, res) => {   
     db.collection('emailList').deleteOne({"_id": ObjectId(req.params.id)}, (err, result) => {
         if (err) return console.log(err)
-
         console.log('deleted email from database')        
         res.redirect('/cms')
     })
 });    
 
 // Authenticate email
-app.post('/authenticate-email/:id', (req, res) => {    
-
+app.post('/authenticate-email/:id', (req, res) => {
     db.collection('emailList').updateOne({_id: ObjectId(req.params.id)}, { $set: {authenticated : true} }, {upsert: true}, (err) => {
         if(err){
             console.log(err)
@@ -180,7 +170,6 @@ app.post('/authenticate-email/:id', (req, res) => {
         }
     })
 })
-
 
 app.get('/about', (req, res) => {    
     res.render('about')
@@ -238,13 +227,9 @@ app.get('/cms-emails', (req, res) => {
 
 // display social page
 app.get('/cms-social', (req, res) => {
-
-
     let myId = '5c3e07532cb5fd2d78cb9ae4';
-
     db.collection('socialPlatforms').find({"_id": ObjectId(myId)}).toArray((err, result) => {
         if (err) return console.log(err)
-
         res.render('cms-social', {socialPlatforms: result, myId: myId})
     })
 })
