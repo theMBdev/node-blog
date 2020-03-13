@@ -8,7 +8,10 @@ const publicPath = path.join(__dirname, '/public');
 app.use(express.static(publicPath));
 
 // to send emails form the server
-var nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
+
+// browser alerts
+
 
 // bodyparser setup 
 const bodyParser= require('body-parser');
@@ -129,10 +132,7 @@ app.post('/submit-email', (req, res) => {
             console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
             // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
         }
-
         main().catch(console.error);
-
-
     })
 })
 
